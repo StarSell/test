@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - Starsell</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="main-content">
+
+    <div class="page-container">
+
+      <!-- Navbar -->
+      <header class="navbar">
+        <div class="hamburger" onclick="openMenu()">☰</div>
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/logo.png" alt="Starsell Logo" />
+          </a>
+        </div>
+        <div class="message-icon">
+          <a href="https://www.instagram.com/jumperzz_off/" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-comment-dots"></i>
+          </a>
+        </div>
+      </header>
+
+      <!-- Sliding Overlay Menu -->
+      <div id="overlay-menu" class="overlay">
+        <span class="close-btn" onclick="closeMenu()">✖</span>
+        <div class="overlay-content">
+          <button>Home</button>
+          <button>Products</button>
+          <button>About</button>
+          <button>How to buy?</button>
+          <button>Contact</button>
+        </div>
+      </div>
+
+      <!-- Insta Logo -->
+      <div class="insta-logo">
+        <a href="https://www.instagram.com/jumperzz_off/">
+          <img src="images/Instagram_icon.png" alt="Instagram" class="insta-logo" />
+        </a>
+      </div>
+
+      <div id="gallery"></div>
+
+    </div> <!-- end of page-container -->
+
+  </div> <!-- end of main-content -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Starsell. All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Slideshow auto-play (optional)
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlides() {
+      slides.forEach((slide) => slide.style.display = "none");
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].style.display = "block";
+    }
+
+    setInterval(showSlides, 3000); // 3 seconds
+    showSlides();
+
+    // Overlay menu nav behavior
+    function openMenu() {
+      document.getElementById("overlay-menu").style.width = "100%";
+    }
+
+    function closeMenu() {
+      const overlay = document.getElementById("overlay-menu");
+      const content = document.querySelector(".overlay-content");
+      content.classList.add("fade-out");
+      overlay.style.width = "0";
+      setTimeout(() => {
+        content.classList.remove("fade-out");
+      }, 600);
+    }
+
+    // Button Navigation
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".overlay-content button").forEach(btn => {
+        const text = btn.textContent.trim();
+        if (text === "Home") btn.onclick = () => window.location.href = "index.html";
+        if (text === "Products") btn.onclick = () => window.location.href = "products.html";
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get("id"));
+      const product = products.find(p => p.id === id);
+
+      const galleryContainer = document.getElementById("gallery");
+
+      if (!product) {
+        galleryContainer.innerText = "Product not found.";
+        return;
+      }
+
+      let currentIndex = 0;
+
+      galleryContainer.innerHTML = `
+        <div class="product-image-viewer">
+          <button id="prevBtn" class="nav-btn" aria-label="Previous image">‹</button>
+          <img id="mainImage" src="${product.images[0]}" alt="${product.name}" />
+          <button id="nextBtn" class="nav-btn" aria-label="Next image">›</button>
+        </div>
+        <div class="product-info">
+          <h2>${product.name}</h2>
+          <p class="price">${product.price}</p>
+          <button id="buyNowBtn">Buy Now</button>
+        </div>
+      `;
+
+      const mainImage = document.getElementById("mainImage");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const buyNowBtn = document.getElementById("buyNowBtn");
+
+      function updateImage() {
+        mainImage.src = product.images[currentIndex];
+      }
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+        updateImage();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % product.images.length;
+        updateImage();
+      });
+
+      buyNowBtn.addEventListener("click", () => {
+        window.location.href = "https://www.instagram.com/jumperzz_off/";
+      });
+    });
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.overlay-content button');
+    buttons.forEach(button => {
+      if (button.textContent.trim() === 'Home') {
+        button.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+       if (button.textContent.trim() === 'Products') {
+        button.addEventListener('click', () => {
+          window.location.href = 'products.html';
+        });
+      }
+      // Add other buttons if needed similarly
+    });
+  });
+</script>
+
+
+</body>
+</html>

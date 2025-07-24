@@ -1,0 +1,657 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+
+.insta-logo {
+  position: fixed;    /* Fix it on the viewport */
+  bottom: 500px;          /* Distance from top */
+  top: 380px;
+  right: 16px;        /* Distance from right */
+  height: 60px;       /* Small size */
+  width: auto;        /* Keep aspect ratio */
+  z-index: 1100;      /* Make sure it’s above other content */
+  cursor: pointer;    /* Optional: shows pointer on hover */
+
+   animation: pulse 2.5s ease-in-out infinite;
+}
+
+
+.navbar {
+  height: 60px;
+  /* rest of your navbar styling */
+}
+
+
+/* Consolidate your navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Distributes space between children */
+  align-items: center;
+  padding: 6px 12px; /* Smaller vertical and horizontal padding */
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky; /* Sticky header */
+  top: 0;
+  z-index: 1000;
+  height: 90px; /* Explicit height for better control */
+  transition: top 0.3s; /* For smooth hiding/reappearing */
+}
+
+
+
+.menu-btn,
+.message-icon {
+  position: relative;
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  left: -21px;
+}
+
+.message-icon:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.message-icon i {
+  color: black;
+}
+
+
+
+
+
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.logo img {
+  height: 150px;
+  margin-top: 9%; /* Moves logo downward */
+}
+
+
+.hamburger {
+  font-size: 37px;
+  padding: 10px 20px;
+  margin-right: auto;
+  cursor: pointer;
+  user-select: none;
+  
+  margin-top: 6px; /* ← Move it down */
+}
+
+
+
+
+
+
+
+
+/* HERO / SLIDESHOW */
+.hero {
+  position: relative;
+  height: calc(100vh - 60px); /* full screen minus navbar */
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 97%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.slideshow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 10;
+}
+
+.hero-content h1 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.shop-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 30px;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.shop-btn.clicked {
+  background: white;
+  color: black;
+}
+
+
+
+
+
+.scroll-section h2,
+.newest h2 {
+  margin: 20px 10px 10px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.infinite-scroll-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 10px;
+  padding: 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-card {
+  min-width: 250px;
+  height: 280px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.scroll-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+
+
+/* NEWEST PRODUCTS GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 8px;
+}
+
+.product-info h3 {
+  font-size: 1em;
+}
+
+.product-info p {
+  font-size: 0.9em;
+  color: gray;
+}
+
+
+.price {
+  color: #c0a16b; /* Or any color you want */
+  font-weight: bold;
+}
+
+
+
+
+
+/* MOBILE ONLY */
+@media (min-width: 768px) {
+  body::before {
+    content: "Mobile only";
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    color: red;
+    font-size: 1.5em;
+  }
+
+  .navbar, .hero, .scroll-section, .newest {
+    display: none;
+  }
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 35px;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.cart-icon:hover {
+  background-color: #f5f5f5;
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #ff3b3b;
+  color: white;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 12px;
+  font-weight: 600;
+  line-height: 1;
+  min-width: 18px;
+  text-align: center;
+}
+
+
+.footer {
+  background: #000;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 0.9em;
+  border-top: 1px solid #222;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.footer-content {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.footer-nav {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-nav a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-nav a:hover {
+  color: #fff;
+}
+
+.arrow-down {
+  margin: 20px auto;
+  width: 30px;
+  animation: bounce 1.5s infinite;
+ 
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* Normal size */
+  }
+  50% {
+    transform: scale(1.0111); /* Slightly bigger */
+  }
+}
+
+
+/* The overlay background */
+.overlay {
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.95); /* semi-transparent white */
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 9999;
+  padding-top: 60px;
+}
+
+/* Close (X) button */
+.close-btn {
+  position: absolute;
+  top: 23px;
+  left: 32px;
+  font-size: 36px;
+  cursor: pointer;
+  color: #333;
+}
+
+
+/* Overlay content */
+.overlay-content {
+  height: 50%;                /* Fill overlay height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Center vertically */
+  align-items: center;         /* Center horizontally */
+  gap: 20px;
+}
+
+
+.overlay-content button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+.overlay-content button:hover {
+  color: #666;
+}
+
+.fade-out {
+  animation: fadeOut 0.4s forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Search Input */
+#searchInput {
+  width: 100%;
+  max-width: 600px;
+  padding: 16px 180px;
+  margin: 30px auto;
+  display: block;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  bottom: 10px;
+}
+
+#searchInput:focus {
+  border-color: #333;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;  
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+@media screen and (min-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.product-card {
+  position: relative; /* for absolute positioning inside */
+  display: block;
+  background-color: #fff;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  width: 280px;
+  height: 390px;
+  cursor: pointer;
+  margin: 2px auto;
+  padding: 0; /* remove padding so overlay sits on image */
+  
+}
+
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0; /* rounded top corners only */
+  display: block;
+  margin-bottom: 0; /* remove margin for tight overlay */
+}
+
+/* Overlay container at bottom of image */
+.product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  color: #fff;
+  border-radius: 0 0 10px 10px; /* rounded bottom corners */
+  box-sizing: border-box;
+  backdrop-filter: blur(6px); /* optional: blur background for style */
+}
+
+/* Text styling */
+.product-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.product-info .price {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f5f5f5; /* gold-ish color */
+}
+
+/* Hover effect */
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+
+#searchInput::placeholder {
+  text-align: center;
+  color: #999;
+}
+
+
+
+
+/* Footer Base */
+.foooter {
+  background-color: #000000; /* Dark background */
+  color: #ffffff;            /* White text */
+  padding: 20px 170px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Footer Content Layout */
+.foooter-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Footer Text */
+.foooter p {
+  margin: 0 0 15px;
+  font-size: 14px;
+  color: #cccccc;
+}
+
+/* Footer Navigation */
+.foooter-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Footer Links */
+.foooter-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.foooter-nav a:hover {
+  color: #ffcc00; /* Highlight color on hover */
+}
+
+
+
+
+.featured-link {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: white;
+}
+
+.image-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0px;
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(97, 97, 97, 0.5); /* optional background for readability */
+  padding: 30px 90px;
+  border-radius: 8px;
+}
+
+.image-overlay h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.image-overlay p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <div class="logo">
+  
+</div>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  
+  <!-- Navbar -->
+  <header class="navbar">
+  <div class="hamburger" onclick="openMenu()">☰</div>
+ 
+
+ <div class="logo">
+  <a href="index.html">
+    <img src="images/logo.png" alt="Starsell Logo" />
+  </a>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+ <div class="message-icon">
+  <a href="https://www.instagram.com/jumperzz_off/?igsh=MXB2bmxyOXE3Nm1ydg%3D%3D&utm_source=qr#" target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-comment-dots"></i>
+  </a>
+ 
+</div>
+
+
+
+
+
+</header>
+
+<!-- Sliding Overlay Menu -->
+<div id="overlay-menu" class="overlay">
+  <span class="close-btn" onclick="closeMenu()">✖</span>
+  <div class="overlay-content">
+    <button>Home</button>
+    <button>Products</button>
+    <button>About</button>
+    <button>How to buy?</button>
+    <button>Contact</button>
+  </div>
+</div>
+
+
+  <!-- Slideshow Section -->
+  <section class="hero">
+    <div class="slideshow">
+      <img src="images/image1.jpg" class="slide active" />
+      <img src="images/image2.webp" class="slide" />
+      <img src="images/image3.jpeg" class="slide" />
+      <img src="images/image4.jpg" class="slide" />
+      <img src="images/image5.jpg" class="slide" />
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to Starsell</h1>
+      <a href="#" class="shop-btn" onclick="event.preventDefault(); this.classList.add('clicked'); setTimeout(() => window.location.href='products.html', 150)">Shop Now</a>
+
+
+       
+
+
+       <div class="arrow-down">
+
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <polyline points="19 12 12 19 5 12" />
+  </svg>
+</div>
+
+    </div>
+  </section>
+
+ 
+
+
+
+  <!-- Scrollable Product Section -->
+  <section class="scroll-section">
+    <h2>Newest Products</h2>
+    <div class="scroll-container" id="scroll-products">
+      <!-- Product cards injected by JS -->
+    </div>
+  </section>
+
+
+  <section class="featured-link">
+  <a href="products.html" class="image-link">
+    <div class="image-overlay">
+      <h2>Moncler</h2>
+      <p>The one and only Mocler luxury brand that is known worldwide.</p>
+    </div>
+    <img src="images/P01068387_d2.avif" alt="Featured Products">
+  </a>
+</section>
+
+
+
+<section class="featured-link">
+  <a href="products.html" class="image-link">
+    <div class="image-overlay">
+      <h2>Louis Vuitton</h2>
+      <p>A well known brand that makes ashes to gold, Louis Vuitton is the brand you will need to impress .</p>
+    </div>
+    <img src="images/LVVVV.jpg" alt="Featured Products">
+  </a>
+</section>
+
+
+<section class="featured-link">
+  <a href="products.html" class="image-link">
+    <div class="image-overlay">
+      <h2>Patek Philippe</h2>
+      <p>Patek Philippe is a symbol of timeless luxury, unmatched craftsmanship, and enduring value.</p>
+    </div>
+    <img src="images/PatekPhlipe.jpg" alt="Featured Products">
+  </a>
+</section>
+
+ 
+
+  <!-- Newest Products Section -->
+  <section class="newest">
+    <h2>Browse</h2>
+    <div class="product-grid" id="newest-products">
+      <!-- Newest product cards injected by JS -->
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+
+
+  <footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Starsell. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+
+<div class="insta-logo">
+  <a href="https://www.instagram.com/jumperzz_off/?igsh=MXB2bmxyOXE3Nm1ydg%3D%3D&utm_source=qr#">
+    <img src="images/Instagram_icon.png" alt="Instagram" class="insta-logo" />
+
+  </a>
+</div>
+
+
+<script>
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop && currentScroll > 90) {
+      // Scrolling down and past navbar height
+      navbar.style.top = "-90px"; // Hide navbar
+    } else {
+      // Scrolling up
+      navbar.style.top = "0"; // Show navbar
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Safari
+  });
+</script>
+
+
+  <script>
+  function openMenu() {
+  const overlay = document.getElementById("overlay-menu");
+  const content = document.querySelector(".overlay-content");
+
+  // Show overlay immediately
+  overlay.style.width = "100%";
+
+  // Remove fade-out to show buttons instantly
+  content.classList.remove("fade-out");
+}
+
+function closeMenu() {
+  const overlay = document.getElementById("overlay-menu");
+  const content = document.querySelector(".overlay-content");
+
+  // Start fade-out on buttons
+  content.classList.add("fade-out");
+
+  // Start shrinking overlay width at the same time
+  overlay.style.width = "0";
+
+  // After 0.4s, hide overlay fully and reset buttons for next open
+  setTimeout(() => {
+    content.classList.remove("fade-out");
+    content.style.opacity = 1;
+    content.style.pointerEvents = "auto";
+  }, 600);
+}
+
+
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.overlay-content button');
+    buttons.forEach(button => {
+      if (button.textContent.trim() === 'Home') {
+        button.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+       if (button.textContent.trim() === 'Products') {
+        button.addEventListener('click', () => {
+          window.location.href = 'products.html';
+        });
+      }
+      // Add other buttons if needed similarly
+    });
+  });
+</script>
+
+
+
+
+
+</body>
+</html>

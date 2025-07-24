@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Products</title>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="hamburger" onclick="openMenu()">☰</div>
+
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Starsell Logo" />
+    </a>
+  </div>
+
+  <div class="message-icon">
+    <a href="https://www.instagram.com/jumperzz_off/?igsh=MXB2bmxyOXE3Nm1ydg%3D%3D&utm_source=qr#" target="_blank">
+      <i class="fas fa-comment-dots"></i>
+    </a>
+  </div>
+</header>
+
+<!-- Overlay Menu -->
+<div id="overlay-menu" class="overlay">
+  <span class="close-btn" onclick="closeMenu()">✖</span>
+  <div class="overlay-content">
+    <button>Home</button>
+    <button>Products</button>
+    <button>About</button>
+    <button>How to buy?</button>
+    <button>Contact</button>
+  </div>
+</div>
+
+<!-- Main Content Wrapper -->
+<main class="main-wrapper">
+
+  <!-- Search Bar -->
+  <section class="search-container">
+    <input type="text" id="searchInput" placeholder="Search products..." />
+  </section>
+
+  <!-- Products Grid -->
+  <section class="newest">
+    <h2>Newest Products</h2>
+    <div id="product-list" class="grid-container">
+      <!-- Products will be injected here by JS -->
+    </div>
+  </section>
+
+   <footer class="foooter">
+  <div class="foooter-content">
+    <p>&copy; 2025 Starsell. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+
+</main>
+
+<!-- Instagram Icon -->
+<div class="insta-logo">
+  <a href="https://www.instagram.com/jumperzz_off/?igsh=MXB2bmxyOXE3Nm1ydg%3D%3D&utm_source=qr#">
+    <img src="images/Instagram_icon.png" alt="Instagram" class="insta-logo" />
+  </a>
+</div>
+
+<!-- Scripts -->
+<script src="products.js"></script>
+<script src="script.js"></script>
+
+<script>
+  // Hide/show navbar on scroll
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    navbar.style.top = (currentScroll > lastScrollTop && currentScroll > 90) ? "-90px" : "0";
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  // Overlay menu logic
+  function openMenu() {
+    const overlay = document.getElementById("overlay-menu");
+    const content = document.querySelector(".overlay-content");
+    overlay.style.width = "100%";
+    content.classList.remove("fade-out");
+  }
+
+  function closeMenu() {
+    const overlay = document.getElementById("overlay-menu");
+    const content = document.querySelector(".overlay-content");
+    content.classList.add("fade-out");
+    overlay.style.width = "0";
+    setTimeout(() => {
+      content.classList.remove("fade-out");
+      content.style.opacity = 1;
+      content.style.pointerEvents = "auto";
+    }, 600);
+  }
+
+  // Overlay button links
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.overlay-content button');
+    buttons.forEach(button => {
+      if (button.textContent.trim() === 'Home') {
+        button.addEventListener('click', () => window.location.href = 'index.html');
+      }
+      if (button.textContent.trim() === 'Products') {
+        button.addEventListener('click', () => window.location.href = 'products.html');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
